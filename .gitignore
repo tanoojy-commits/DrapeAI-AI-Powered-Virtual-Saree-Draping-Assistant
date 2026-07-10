@@ -10,6 +10,8 @@ __pycache__/
 .env
 .env.*
 !.env.example
+.vercel/
+frontend/.vercel/
 
 # Build outputs
 dist/
