@@ -1,0 +1,2 @@
+"""StyleAI backend application package."""
+
