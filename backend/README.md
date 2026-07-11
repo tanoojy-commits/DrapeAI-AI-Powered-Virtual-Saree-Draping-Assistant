@@ -69,3 +69,33 @@ The seed script is idempotent. It checks slugs before inserting records, so it
 can be run more than once without creating duplicate categories or sample
 products.
 
+## Authentication
+
+Phase 5 adds FastAPI-managed authentication using:
+
+- Argon2 password hashing
+- JWT access tokens
+- `Authorization: Bearer <token>` requests
+- Role-based authorization with `USER` and `ADMIN`
+
+Required local backend environment values:
+
+```text
+JWT_SECRET_KEY=replace-with-a-long-random-secret
+JWT_ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=60
+```
+
+Auth endpoints:
+
+```text
+POST /api/v1/auth/register
+POST /api/v1/auth/login
+GET /api/v1/auth/me
+GET /api/v1/admin/test
+```
+
+The frontend stores the development access token in `localStorage`. This is easy
+for local Vite and deployed Vercel previews, but it has XSS risk. Before
+production launch, migrate session storage to secure HttpOnly cookies with
+`SameSite`, `Secure`, and credentialed CORS settings.

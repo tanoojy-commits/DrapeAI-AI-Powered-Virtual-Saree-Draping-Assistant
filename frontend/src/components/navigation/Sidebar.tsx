@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { dashboardNavigation } from "@/constants/app";
+import { useAuth } from "@/hooks/useAuth";
 
 export function Sidebar() {
+  const { user } = useAuth();
+
   return (
     <aside className="hidden w-64 shrink-0 border-r border-brand/10 bg-white/70 p-4 lg:block">
       <p className="px-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand">
@@ -17,8 +20,15 @@ export function Sidebar() {
             {item.label}
           </NavLink>
         ))}
+        {user?.role === "ADMIN" ? (
+          <NavLink
+            to="/admin"
+            className="rounded-xl px-3 py-2 text-sm font-medium text-ink/70 transition hover:bg-brand-soft hover:text-brand"
+          >
+            Admin
+          </NavLink>
+        ) : null}
       </nav>
     </aside>
   );
 }
-

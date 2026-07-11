@@ -1,9 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
+import { useAuth } from "@/hooks/useAuth";
+import { getApiErrorMessage } from "@/utils/apiError";
 
 const loginSchema = z.object({
   email: z.string().email("Enter a valid email."),
@@ -13,14 +17,26 @@ const loginSchema = z.object({
 type LoginForm = z.infer<typeof loginSchema>;
 
 export function LoginPage() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [formError, setFormError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<LoginForm>({ resolver: zodResolver(loginSchema) });
 
-  function onSubmit(values: LoginForm) {
-    console.log("Login form submitted", values);
+  async function onSubmit(values: LoginForm) {
+    setFormError(null);
+    try {
+      await login(values);
+      const fallback = "/dashboard";
+      const from = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname;
+      navigate(from ?? fallback, { replace: true });
+    } catch (error) {
+      setFormError(getApiErrorMessage(error));
+    }
   }
 
   return (
@@ -28,7 +44,7 @@ export function LoginPage() {
       <Card className="w-full">
         <form onSubmit={handleSubmit(onSubmit)}>
           <h1 className="text-2xl font-bold">Welcome back</h1>
-          <p className="mt-2 text-sm text-muted">Backend auth arrives in Phase 5.</p>
+          <p className="mt-2 text-sm text-muted">Login to continue to your workspace.</p>
           <div className="mt-6 grid gap-4">
             <Input label="Email" type="email" error={errors.email?.message} {...register("email")} />
             <Input
@@ -38,12 +54,12 @@ export function LoginPage() {
               {...register("password")}
             />
           </div>
-          <Button className="mt-6 w-full" type="submit">
-            Login
+          {formError ? <p className="mt-4 text-sm text-brand">{formError}</p> : null}
+          <Button className="mt-6 w-full" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Logging in..." : "Login"}
           </Button>
         </form>
       </Card>
     </section>
   );
 }
-

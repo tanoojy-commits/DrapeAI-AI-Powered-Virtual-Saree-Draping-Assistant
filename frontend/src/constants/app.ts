@@ -11,8 +11,8 @@ export const publicNavigation: NavigationItem[] = [
 
 export const dashboardNavigation: NavigationItem[] = [
   { label: "Overview", href: "/dashboard" },
-  { label: "Upload", href: "/dashboard" },
-  { label: "Sarees", href: "/dashboard" },
-  { label: "History", href: "/dashboard" },
+  { label: "Profile", href: "/profile" },
+  { label: "Try-On", href: "/try-on" },
+  { label: "History", href: "/history" },
+  { label: "Favorites", href: "/favorites" },
 ];
-

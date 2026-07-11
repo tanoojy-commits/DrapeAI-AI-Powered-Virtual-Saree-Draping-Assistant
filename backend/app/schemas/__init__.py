@@ -1,4 +1,5 @@
 from app.schemas.category import CategoryBase, CategoryCreate, CategoryResponse
+from app.schemas.auth import LoginRequest, RegisterRequest, TokenResponse
 from app.schemas.favorite import FavoriteResponse
 from app.schemas.generation import GenerationResponse
 from app.schemas.product import ProductBase, ProductCreate, ProductResponse
@@ -11,11 +12,14 @@ __all__ = [
     "CategoryResponse",
     "FavoriteResponse",
     "GenerationResponse",
+    "LoginRequest",
     "ProductBase",
     "ProductCreate",
     "ProductImageBase",
     "ProductImageResponse",
     "ProductResponse",
+    "RegisterRequest",
+    "TokenResponse",
     "UserBase",
     "UserResponse",
 ]

@@ -17,6 +17,9 @@ class Settings(BaseSettings):
         ],
     )
     log_level: str = "INFO"
+    jwt_secret_key: str | None = None
+    jwt_algorithm: str = "HS256"
+    access_token_expire_minutes: int = 60
 
     openai_api_key: str | None = None
 
@@ -40,4 +43,3 @@ class Settings(BaseSettings):
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
-

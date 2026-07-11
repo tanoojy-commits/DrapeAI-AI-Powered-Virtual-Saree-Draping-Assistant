@@ -18,9 +18,15 @@ DrapeAI will be a production-ready web application where users can upload their 
 
 ## Current Phase
 
-Phase 1 is complete: project planning, architecture, Git setup, and folder structure.
+Phases 1 through 5 are complete: project planning, frontend foundation, backend foundation, database models/migrations, and authentication/authorization.
 
-See [docs/phase-01-project-foundation.md](docs/phase-01-project-foundation.md).
+See:
+
+- [docs/phase-01-project-foundation.md](docs/phase-01-project-foundation.md)
+- [docs/phase-02-frontend-setup.md](docs/phase-02-frontend-setup.md)
+- [docs/phase-03-backend-foundation.md](docs/phase-03-backend-foundation.md)
+- [docs/phase-04-database-models-migrations.md](docs/phase-04-database-models-migrations.md)
+- [docs/phase-05-authentication-authorization.md](docs/phase-05-authentication-authorization.md)
 
 ## Planned Phases
 
@@ -38,4 +44,3 @@ See [docs/phase-01-project-foundation.md](docs/phase-01-project-foundation.md).
 12. Testing
 13. Deployment
 14. Documentation
-
